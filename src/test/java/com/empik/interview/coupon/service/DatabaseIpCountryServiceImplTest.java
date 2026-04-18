@@ -16,13 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Dominik Zieliński
- * Date: 18/04/2026
- * Time: 08:46
- */
 @ExtendWith(MockitoExtension.class)
-public class DatabaseIpCountryServiceImplTest {
+class DatabaseIpCountryServiceImplTest {
 
     @Mock
     private IpCountryRepository ipCountryRepository;

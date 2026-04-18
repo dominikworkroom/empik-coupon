@@ -35,11 +35,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Dominik Zieliński
- * Date: 18/04/2026
- * Time: 08:46
- */
 @ExtendWith(MockitoExtension.class)
 class CouponServiceImplTest {
 
