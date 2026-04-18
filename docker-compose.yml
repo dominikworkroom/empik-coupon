@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: coupon-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: coupondb
+      MYSQL_USER: coupon
+      MYSQL_PASSWORD: coupon
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  coupon:
+    build: .
+    container_name: coupon-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: coupondb
+      DB_USER: coupon
+      DB_PASSWORD: coupon
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+      ENABLE_DEBUG: true
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+
+volumes:
+  mysql_data:
